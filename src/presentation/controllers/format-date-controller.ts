@@ -1,4 +1,8 @@
-import { badRequest, Controller, HttpRequest, HttpResponse, Validation } from '@/presentation/protocols'
+import {
+  badRequest, Controller,
+  HttpRequest, HttpResponse,
+  Validation
+} from './format-date-controller-protocols'
 
 export class FormatDateController implements Controller {
   constructor (private readonly validation: Validation) {}
