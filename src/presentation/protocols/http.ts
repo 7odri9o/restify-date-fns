@@ -9,6 +9,11 @@ export type HttpRequest = {
   body?: any
 }
 
+export const ok = (data: any): HttpResponse => ({
+  status: 200,
+  body: data
+})
+
 export const badRequest = (error: Error): HttpResponse => ({
   status: 400,
   body: error

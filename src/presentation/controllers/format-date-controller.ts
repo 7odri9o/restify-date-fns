@@ -1,5 +1,5 @@
 import {
-  badRequest, serverError, Controller,
+  badRequest, ok, serverError, Controller,
   HttpRequest, HttpResponse,
   FormatDate,
   Validation
@@ -19,7 +19,8 @@ export class FormatDateController implements Controller {
       }
 
       const { date, expectedFormat } = httpRequest.body
-      this.formatDate.format(date, expectedFormat)
+      const formattedDate = this.formatDate.format(date, expectedFormat)
+      return ok({ date: formattedDate })
     } catch (error) {
       return serverError(error)
     }
