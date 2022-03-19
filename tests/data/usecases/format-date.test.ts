@@ -1,6 +1,8 @@
 import { FormatDateImpl } from '@/data/usecases/format-date'
 
-import { DateFormatterSpy } from '@/tests/presentation/mocks'
+import {
+  DateFormatterSpy
+} from '@/tests/presentation/mocks'
 
 type SutTypes = {
   sut: FormatDateImpl
@@ -27,6 +29,20 @@ describe('FormatDate Usecase', () => {
 
       expect(dateFormatterSpy.date).toBe(date)
       expect(dateFormatterSpy.expectedFormat).toBe(expectedFormat)
+    })
+  })
+
+  describe('Handle Exceptions', () => {
+    test('Should throw if DateFormatter throws', () => {
+      const { sut, dateFormatterSpy } = makeSut()
+      jest.spyOn(dateFormatterSpy, 'format').mockImplementationOnce(() => {
+        throw new Error()
+      })
+
+      const date = '2022-02-01'
+      const expectedFormat = 'DD/MM/YYYY'
+
+      expect(() => sut.format(date, expectedFormat)).toThrow()
     })
   })
 })
