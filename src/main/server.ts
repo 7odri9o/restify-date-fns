@@ -1,8 +1,10 @@
 import 'module-alias/register'
 
+import env from './config/env'
+
 const startApp = async (): Promise<void> => {
   const app = (await import('./config/app')).default
-  app.listen(3000)
+  app.listen(env.app.port)
 }
 
 startApp()
