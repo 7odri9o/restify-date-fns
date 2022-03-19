@@ -1,6 +1,7 @@
 import { FormatDateController } from '@/presentation/controllers/format-date-controller'
 import {
   badRequest,
+  serverError,
   HttpRequest
 } from '@/presentation/controllers/format-date-controller-protocols'
 
@@ -48,6 +49,19 @@ describe('FormatDate Controller', () => {
     const httpResponse = await sut.handle(httpRequest)
 
     const expected = badRequest(validationSpy.error)
+    expect(httpResponse).toEqual(expected)
+  })
+
+  test('Should return 500 if Validation throws', async () => {
+    const { sut, validationSpy } = makeSut()
+    jest.spyOn(validationSpy, 'validate').mockImplementationOnce(() => {
+      throw new Error()
+    })
+
+    const httpRequest = mockHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+
+    const expected = serverError(new Error())
     expect(httpResponse).toEqual(expected)
   })
 })
