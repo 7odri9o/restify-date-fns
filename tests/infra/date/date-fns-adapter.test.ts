@@ -15,28 +15,9 @@ const makeSut = (): SutTypes => {
 }
 
 jest.mock('date-fns', () => ({
-  receivedDate: null as number | Date,
-  receivedFormat: null as string,
-  receivedArgument: null as string,
-  formattedDate: null as string,
-  parsedDate: null as Date,
+  format: jest.fn(),
 
-  format (date: number | Date, format: string): string {
-    const originalDateFns = jest.requireActual('date-fns')
-
-    this.receivedDate = date
-    this.receivedFormat = format
-    this.formattedDate = originalDateFns.format(date, format)
-    return this.formattedDate
-  },
-
-  parseISO (argument: string): Date {
-    const originalDateFns = jest.requireActual('date-fns')
-
-    this.argument = argument
-    this.parsedDate = originalDateFns.parseISO(argument)
-    return this.parsedDate
-  }
+  parseISO: jest.fn()
 }))
 
 describe('DateFns Adapter', () => {
@@ -51,17 +32,16 @@ describe('DateFns Adapter', () => {
   describe('Dependency calls', () => {
     test('Should call date-fns.format with correct values', () => {
       const { sut } = makeSut()
+      const formatSpy = jest.spyOn(dateFns, 'format')
+      const parseISOSpy = jest.spyOn(dateFns, 'parseISO')
 
       const date = '2022-03-19'
       const expectedFormat = 'yyyy-MM-dd'
 
       sut.format(date, expectedFormat)
 
-      const receivedDateName = 'receivedDate'
-      const parsedDateName = 'parsedDate'
-      const receivedFormatName = 'receivedFormat'
-      expect(dateFns[receivedDateName]).toBe(dateFns[parsedDateName])
-      expect(dateFns[receivedFormatName]).toBe(expectedFormat)
+      expect(formatSpy).toHaveBeenCalled()
+      expect(parseISOSpy).toHaveBeenCalledWith(date)
     })
   })
 
