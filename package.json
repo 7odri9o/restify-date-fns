@@ -1,0 +1,10 @@
+{
+  "name": "simplify-dates",
+  "version": "0.0.1-beta",
+  "description": "Deal your dates wherever you want",
+  "main": "index.js",
+  "repository": "git@github.com:7odri9o/simplify-dates.git",
+  "author": "Rodrigo Rocha <rodrigo.srrocha@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
