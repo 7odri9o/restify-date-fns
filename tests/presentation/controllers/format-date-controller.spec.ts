@@ -1,5 +1,6 @@
 import { FormatDateController } from '@/presentation/controllers/format-date-controller'
 import {
+  badRequest,
   HttpRequest
 } from '@/presentation/controllers/format-date-controller-protocols'
 
@@ -37,5 +38,16 @@ describe('FormatDate Controller', () => {
 
     const expected = httpRequest.body
     expect(validationSpy.input).toEqual(expected)
+  })
+
+  test('Should return 400 if Validation fails', async () => {
+    const { sut, validationSpy } = makeSut()
+    validationSpy.error = new Error()
+
+    const httpRequest = mockHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+
+    const expected = badRequest(validationSpy.error)
+    expect(httpResponse).toEqual(expected)
   })
 })
