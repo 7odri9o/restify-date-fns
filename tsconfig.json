@@ -13,5 +13,6 @@
     }
   },
   "include": ["src", "tests"],
-  "exclude": []
+  "exclude": [],
+  "files": ["global.d.ts"]
 }
