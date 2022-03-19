@@ -1,6 +1,7 @@
 import { FormatDateController } from '@/presentation/controllers/format-date-controller'
 import {
   badRequest,
+  ok,
   serverError,
   HttpRequest
 } from '@/presentation/controllers/format-date-controller-protocols'
@@ -82,6 +83,20 @@ describe('FormatDate Controller', () => {
       const httpResponse = await sut.handle(httpRequest)
 
       const expected = serverError(new Error())
+      expect(httpResponse).toEqual(expected)
+    })
+  })
+
+  describe('Success', () => {
+    test('Should return 200 on format success', async () => {
+      const { sut, formatDateSpy } = makeSut()
+
+      const httpRequest = mockHttpRequest()
+      const httpResponse = await sut.handle(httpRequest)
+
+      const expected = ok({
+        date: formatDateSpy.formattedDate
+      })
       expect(httpResponse).toEqual(expected)
     })
   })
