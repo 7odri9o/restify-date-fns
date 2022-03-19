@@ -15,4 +15,10 @@ describe('DatePattern Validation', () => {
     const error = sut.validate({ invalidField: faker.random.word() })
     expect(error).toEqual(new InvalidParamError(field))
   })
+
+  test('Should not return anything if validation succeeds', () => {
+    const sut = makeSut()
+    const error = sut.validate({ [field]: 'yyyy-MM-dd' })
+    expect(error).toBeFalsy()
+  })
 })
