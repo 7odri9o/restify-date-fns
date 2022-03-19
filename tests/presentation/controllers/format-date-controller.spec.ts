@@ -5,28 +5,31 @@ import {
   HttpRequest
 } from '@/presentation/controllers/format-date-controller-protocols'
 
-import { ValidationSpy } from '@/tests/presentation/mocks'
+import { FormatDateSpy, ValidationSpy } from '@/tests/presentation/mocks'
 
 import faker from '@faker-js/faker'
 
 const mockHttpRequest = (): HttpRequest => ({
   body: {
     date: faker.date.past(),
-    format: faker.random.word()
+    expectedFormat: faker.random.word()
   }
 })
 
 const makeSut = (): SutTypes => {
+  const formatDateSpy = new FormatDateSpy()
   const validationSpy = new ValidationSpy()
-  const sut = new FormatDateController(validationSpy)
+  const sut = new FormatDateController(formatDateSpy, validationSpy)
   return {
     sut,
+    formatDateSpy,
     validationSpy
   }
 }
 
 type SutTypes = {
   sut: FormatDateController
+  formatDateSpy: FormatDateSpy
   validationSpy: ValidationSpy
 }
 
@@ -40,6 +43,20 @@ describe('FormatDate Controller', () => {
 
       const expected = httpRequest.body
       expect(validationSpy.input).toEqual(expected)
+    })
+
+    test('Should call FormatDate with correct values', async () => {
+      const { sut, formatDateSpy } = makeSut()
+
+      const httpRequest = mockHttpRequest()
+      await sut.handle(httpRequest)
+
+      const expected = {
+        date: httpRequest.body.date,
+        expectedFormat: httpRequest.body.expectedFormat
+      }
+      expect(formatDateSpy.date).toEqual(expected.date)
+      expect(formatDateSpy.expectedFormat).toEqual(expected.expectedFormat)
     })
   })
 
