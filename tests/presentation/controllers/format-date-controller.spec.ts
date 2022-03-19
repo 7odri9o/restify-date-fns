@@ -28,4 +28,21 @@ describe('FormatDate Controller', () => {
     }
     expect(httpResponse).toEqual(expected)
   })
+
+  test('Should return 400 if date is not provided', async () => {
+    const { sut } = makeSut()
+
+    const httpRequest = {
+      body: {
+        format: 'any_format'
+      }
+    }
+    const httpResponse = await sut.handle(httpRequest)
+
+    const expected = {
+      status: 400,
+      error: new Error('Missing param: date')
+    }
+    expect(httpResponse).toEqual(expected)
+  })
 })
