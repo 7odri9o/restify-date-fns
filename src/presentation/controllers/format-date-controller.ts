@@ -6,5 +6,12 @@ export class FormatDateController {
         error: new Error('Missing param: format')
       }
     }
+
+    if (!httpRequest.body.date) {
+      return {
+        status: 400,
+        error: new Error('Missing param: date')
+      }
+    }
   }
 }
