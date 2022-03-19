@@ -5,10 +5,12 @@ import {
 
 import { ValidationSpy } from '@/tests/presentation/mocks'
 
+import faker from '@faker-js/faker'
+
 const mockHttpRequest = (): HttpRequest => ({
   body: {
-    date: 'any_date',
-    format: 'any_format'
+    date: faker.date.past(),
+    format: faker.random.word()
   }
 })
 
