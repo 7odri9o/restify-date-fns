@@ -31,37 +31,41 @@ type SutTypes = {
 }
 
 describe('FormatDate Controller', () => {
-  test('Should call Validation with correct values', async () => {
-    const { sut, validationSpy } = makeSut()
+  describe('Dependencies Calls', () => {
+    test('Should call Validation with correct values', async () => {
+      const { sut, validationSpy } = makeSut()
 
-    const httpRequest = mockHttpRequest()
-    await sut.handle(httpRequest)
+      const httpRequest = mockHttpRequest()
+      await sut.handle(httpRequest)
 
-    const expected = httpRequest.body
-    expect(validationSpy.input).toEqual(expected)
+      const expected = httpRequest.body
+      expect(validationSpy.input).toEqual(expected)
+    })
   })
 
-  test('Should return 400 if Validation fails', async () => {
-    const { sut, validationSpy } = makeSut()
-    validationSpy.error = new Error()
+  describe('Handle Exceptions', () => {
+    test('Should return 400 if Validation fails', async () => {
+      const { sut, validationSpy } = makeSut()
+      validationSpy.error = new Error()
 
-    const httpRequest = mockHttpRequest()
-    const httpResponse = await sut.handle(httpRequest)
+      const httpRequest = mockHttpRequest()
+      const httpResponse = await sut.handle(httpRequest)
 
-    const expected = badRequest(validationSpy.error)
-    expect(httpResponse).toEqual(expected)
-  })
-
-  test('Should return 500 if Validation throws', async () => {
-    const { sut, validationSpy } = makeSut()
-    jest.spyOn(validationSpy, 'validate').mockImplementationOnce(() => {
-      throw new Error()
+      const expected = badRequest(validationSpy.error)
+      expect(httpResponse).toEqual(expected)
     })
 
-    const httpRequest = mockHttpRequest()
-    const httpResponse = await sut.handle(httpRequest)
+    test('Should return 500 if Validation throws', async () => {
+      const { sut, validationSpy } = makeSut()
+      jest.spyOn(validationSpy, 'validate').mockImplementationOnce(() => {
+        throw new Error()
+      })
 
-    const expected = serverError(new Error())
-    expect(httpResponse).toEqual(expected)
+      const httpRequest = mockHttpRequest()
+      const httpResponse = await sut.handle(httpRequest)
+
+      const expected = serverError(new Error())
+      expect(httpResponse).toEqual(expected)
+    })
   })
 })
