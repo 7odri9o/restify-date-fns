@@ -24,7 +24,7 @@ describe('FormatDate Controller', () => {
 
     const expected = {
       status: 400,
-      error: new Error('Missing param: format')
+      body: new Error('Missing param: format')
     }
     expect(httpResponse).toEqual(expected)
   })
@@ -41,7 +41,7 @@ describe('FormatDate Controller', () => {
 
     const expected = {
       status: 400,
-      error: new Error('Missing param: date')
+      body: new Error('Missing param: date')
     }
     expect(httpResponse).toEqual(expected)
   })
