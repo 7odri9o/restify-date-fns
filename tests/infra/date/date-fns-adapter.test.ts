@@ -64,4 +64,18 @@ describe('DateFns Adapter', () => {
       expect(dateFns[receivedFormatName]).toBe(expectedFormat)
     })
   })
+
+  describe('Exceptions', () => {
+    test('Should throw if date-fns.format throws', () => {
+      const { sut } = makeSut()
+      jest.spyOn(dateFns, 'format').mockImplementationOnce(() => {
+        throw new Error()
+      })
+
+      const date = '2022-02-01'
+      const expectedFormat = 'DD/MM/YYYY'
+
+      expect(() => sut.format(date, expectedFormat)).toThrow()
+    })
+  })
 })
