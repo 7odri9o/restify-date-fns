@@ -1,9 +1,9 @@
 {
-  "name": "simplify-dates",
+  "name": "restify-date-fns",
   "version": "0.0.1-beta",
   "description": "Deal your dates wherever you want",
   "main": "index.js",
-  "repository": "git@github.com:7odri9o/simplify-dates.git",
+  "repository": "git@github.com:7odri9o/restify-date-fns.git",
   "author": "Rodrigo Rocha <rodrigo.srrocha@gmail.com>",
   "license": "MIT",
   "private": false,
