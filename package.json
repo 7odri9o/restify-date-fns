@@ -6,5 +6,9 @@
   "repository": "git@github.com:7odri9o/simplify-dates.git",
   "author": "Rodrigo Rocha <rodrigo.srrocha@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "@types/node": "^17.0.21",
+    "typescript": "^4.6.2"
+  }
 }
