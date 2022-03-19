@@ -45,4 +45,16 @@ describe('FormatDate Usecase', () => {
       expect(() => sut.format(date, expectedFormat)).toThrow()
     })
   })
+
+  describe('Success', () => {
+    test('Should return a formatted date on success', () => {
+      const { sut } = makeSut()
+
+      const date = '2022-02-01'
+      const expectedFormat = 'DD/MM/YYYY'
+
+      const formattedDate = sut.format(date, expectedFormat)
+      expect(formattedDate).toBeTruthy()
+    })
+  })
 })
