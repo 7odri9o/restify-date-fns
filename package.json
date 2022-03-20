@@ -1,6 +1,6 @@
 {
   "name": "restify-date-fns",
-  "version": "0.0.1-beta",
+  "version": "0.1.1-beta",
   "description": "Deal your dates wherever you want",
   "main": "index.js",
   "repository": "git@github.com:7odri9o/restify-date-fns.git",
@@ -9,7 +9,11 @@
   "private": false,
   "scripts": {
     "start": "node dist/main/server.js",
+    "debug": "node --inspect=0.0.0.0:9222 --no-lazy dist/main/server.js",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
+    "up:silent": "npm run build && docker-compose up -d",
+    "up:verbose": "npm run build && docker-compose up",
+    "down": "docker-compose down",
     "lint": "eslint --ext .ts src/**",
     "lint:fix": "eslint --fix --ext .ts src/**",
     "test": "jest --passWithNoTests --runInBand --no-cache",
@@ -45,6 +49,10 @@
     "date-fns": "^2.28.0",
     "express": "^4.17.3",
     "module-alias": "^2.2.2"
+  },
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
   },
   "_moduleAliases": {
     "@": "dist"
