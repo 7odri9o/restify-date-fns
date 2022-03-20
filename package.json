@@ -1,6 +1,6 @@
 {
   "name": "restify-date-fns",
-  "version": "0.0.1-beta",
+  "version": "0.1.1-beta",
   "description": "Deal your dates wherever you want",
   "main": "index.js",
   "repository": "git@github.com:7odri9o/restify-date-fns.git",
