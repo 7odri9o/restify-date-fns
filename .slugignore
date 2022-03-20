@@ -12,7 +12,6 @@ src
 .lintstagedrc.json
 docker-compose.yml
 Dockerfile
-global.d.ts
 jest-integration-config.js
 jest-unit-config.js
 jest.config.js
