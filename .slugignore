@@ -4,7 +4,6 @@ coverage
 requirements
 tests
 src
-yarn-lock.json
 .dockerignore
 .env
 .eslintignore
@@ -13,7 +12,7 @@ yarn-lock.json
 .lintstagedrc.json
 docker-compose.yml
 Dockerfile
-globa.d.ts
+global.d.ts
 jest-integration-config.js
 jest-unit-config.js
 jest.config.js
