@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  restify-date-fns:
+    container_name: restify-date-fns
+    image: node:14.19-stretch-slim
+    working_dir: /usr/src/app
+    restart: always
+    command: bash -c "yarn install --prod && npm run debug"
+    environment:
+      - PORT=$PORT
+    volumes:
+      - ./dist/:/usr/src/app/dist/
+      - ./package.json:/usr/src/app/package.json
+      - ./yarn-lock.json:/usr/src/app/yarn-lock.json
+    ports:
+      - "3000:3000"
+      - "9222:9222"
+    networks:
+      - restify-date-fns
+
+networks:
+  restify-date-fns:
+    driver: bridge
