@@ -1,5 +1,5 @@
 import { Controller } from '@/presentation/protocols'
-import { FormatDateController } from '@/presentation/controllers/format-date-controller'
+import { FormatDateController } from '@/presentation/controllers/format/format-date-controller'
 import { makeFormatDate } from '@/main/factories/usecases/format-date-factory'
 import { makeFormatDateValidation } from '@/main/factories/validators/format-date-validation-composite-factory'
 import { makeLogControllerDecorator } from '@/main/factories/decorators/log-controller-decorator-factory'
