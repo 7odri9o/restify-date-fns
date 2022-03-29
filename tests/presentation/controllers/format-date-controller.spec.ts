@@ -1,10 +1,10 @@
-import { FormatDateController } from '@/presentation/controllers/format-date-controller'
+import { FormatDateController } from '@/presentation/controllers/format/format-date-controller'
 import {
   badRequest,
   ok,
   serverError,
   HttpRequest
-} from '@/presentation/controllers/format-date-controller-protocols'
+} from '@/presentation/controllers/format/format-date-controller-protocols'
 
 import { FormatDateSpy, ValidationSpy } from '@/tests/presentation/mocks'
 
